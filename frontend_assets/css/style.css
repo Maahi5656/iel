@@ -5,7 +5,7 @@
 
 -----------------------------------------------------------------------------------*/
 
-    /*-----------------------------------------------------------------------------------  
+    /*-----------------------------------------------------------------------------------
      CSS INDEX
     ===================
 
@@ -25,7 +25,7 @@
     14. Dining & Bar page
     16. News page
 
-    
+
 -----------------------------------------------------------------------------------*/
 /*----------------------------------------*/
 /*  Google Fonts
@@ -82,28 +82,28 @@ h1, h2, h3, h4, h5, h6 {
 h1{
 	font-size: 48px;
 	line-height: 50px;
-		
+
 }
 h2{
 	font-size: 38px;
 	line-height: 40px;
-		
+
 }
 h3{
 	font-size: 30px;
 	line-height: 32px;
 	font-family: 'Raleway', sans-serif;
-		
+
 }
 h4{
 	font-size: 23px;
 	line-height: 26px;
-		
+
 }
 h5{
 	font-size: 18px;
 	line-height: 22px;
-		
+
 }
 
 a {
@@ -184,10 +184,10 @@ input, select, textarea, input[type="text"], input[type="date"], input[type="url
 input:focus, textarea:focus, select:focus {
     outline: none;
 }
-div#preloader { 
+div#preloader {
 	position: fixed;
-	left: 0; 
-	top: 0; 
+	left: 0;
+	top: 0;
 	z-index: 99999;
 	width: 100%;
 	height: 100%;
@@ -2633,7 +2633,9 @@ select.ht-field {
     box-shadow: 0px 23px 35px rgba(4,4,4,0.54);
 }
 .welcome-section-4 .intro_img img {
-    max-width: 100%;
+    max-width: 360px;
+    height: 360px;
+    width: 100%;  
 }
 
 .fluid-know-area {
@@ -3017,6 +3019,12 @@ select.ht-field {
     position: relative;
     overflow: hidden;
 }
+
+.offer-section .tour-img img{
+	width: 100%;
+	height: 250px;
+}
+
 .offer-section .tour-img .price {
     position: absolute;
     bottom: 0;
@@ -3805,6 +3813,11 @@ padding-bottom: 0;
 .about-whoweare .about-content .lists ul li i {
     color: #153356;
     margin-right: 5px;
+}
+
+.about-whoweare .about-content h4{
+    margin-top: 20px;
+    font-size: 16px;
 }
 
 .about-us-activities .about-widget {
@@ -4705,13 +4718,6 @@ padding-bottom: 0;
 /*--------------------------------*/
 /* .End CSS
 /*--------------------------------*/
-
-
-
-
-
-
-
-
-
-
+.single-about-project .awesome-img img{
+    width: 100%;
+}

@@ -1,6 +1,11 @@
+<?php
+include 'database.php';
+?>
+
+
 <!doctype html>
 <html class="no-js" lang="en">
-	
+
 <head>
 		<meta charset="utf-8">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -8,7 +13,7 @@
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<!-- favicon -->		
+		<!-- favicon -->
 		<link rel="shortcut icon" type="image/x-icon" href="img/logo/favicon.png">
 
 		<!-- all css here -->
@@ -46,12 +51,18 @@
 		<![endif]-->
 
         <div id="preloader"></div>
+				<!--header-->
+
         <!-- Main menu -->
         <section class="main-menu-three finance-navbar">
+					<?php
+                         $sql = "select * from concern";
+						 $result = mysqli_query($connection, $sql);
+					?>
             <nav id="main-navigation-wrapper" class="navbar navbar-default Marcho-navbar">
                 <div class="container">
                     <div class="float-left">
-                        <div class="logo pull-left"><a href="index-2.html"><img src="frontend_assets/img/logo/logo2.png" alt="Awesome Image"></a></div>
+                        <div class="logo pull-left"><a href="index.php"><img src="img/logo/logo.jpg" alt="Awesome Image" style="height:65px;"></a></div>
                     </div>
                     <div class="float-right">
                         <div class="navbar-header">
@@ -59,34 +70,19 @@
                         </div>
                         <div id="main-navigation" class="collapse navbar-collapse">
                             <ul class="nav navbar-nav">
-                                <li class="dropdown"><a href="index-2.html">Home</a>
-                                    <ul class="dropdown-submenu">
-                                        <li><a href="index-2.html">Home One</a></li>
-                                        <li><a href="index-3.html">Home Two</a></li>
-                                        <li><a href="index-4.html">Home Three</a></li>
-                                        <li><a href="index-5.html">Home Four</a></li>
-                                        <li><a href="index-6.html">Home Five</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown"><a href="about.html">about us</a>
+                                <li class="dropdown"><a href="index.php">Home</a></li>
+                                <li class="dropdown"><a href="about-us.php">about us</a></li>
+                                <li class="dropdown"><a href="#">Our Concern</a>
+                                <ul class="dropdown-submenu">
+                                  <?php foreach($result as $row){ ?>
+                                    <li><a href=""><?php echo $row['name'] ?></a></li>
 
-                                </li>
-                                <li class="dropdown"><a href="#">suits & rooms</a>
-                                    <ul class="dropdown-submenu">
-                                        <li><a href="rooms.html">Room List</a></li>
-                                        <li><a href="single_room.html">Single Room</a></li>
-
-                                    </ul>
-                                </li>
-                                <li class="dropdown"><a href="dining%26bar.html">Dining & BAr</a></li>
-                                <li class="dropdown"><a href="offers.html">offers</a></li>
-                                <li class="dropdown"><a href="#">news</a>
-                                    <ul class="dropdown-submenu">
-                                        <li><a href="news.html">News Standard</a></li>
-                                        <li><a href="news-details.html">News Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">contact us</a></li>
+                                  <?php } ?>
+                                </ul>
+                            </li>
+                                <li><a href="missionvision.php">Mission & Vision</a></li>
+                                <li><a href="gallery.php">Gallery</a></li>
+                                <li><a href="contact.php">contact us</a></li>
                             </ul>
 
                         </div>
@@ -101,7 +97,7 @@
         <section class="slider-section">
            <div class="slider-overly"></div>
             <div class="intro-carousel our-slider">
-                
+
                 <div class="intro-content-1">
                     <div class="slider-images">
                         <img src="frontend_assets/img/slider/1.jpg" alt="">
@@ -166,25 +162,28 @@
         <!-- End Slider section -->
         <!-- Start welcome section -->
         <section class="welcome-section-4 sec-padding">
+            <?php 
+             $query = "SELECT * FROM about";
+             $result = mysqli_query($connection, $query);
+            ?>
             <div class="container">
                 <div class="row">
                   <div class="col-md-5">
                       <div class="section-titleBar text-left">
-                          <h3>Enjoy and Relax in our Hotel</h3>
-                          <p>Integer placerat arcu quis sem aliquet tempor. Maecenas in dictum arcu. Curabitur cursus est libero, id accumsan sapien ullamcorper quis. Pellentesque imperdiet mi quis volutpat facilisis. In facilisis sit amet lacus ut convallis. Aenean congue porta dolor, in rutrum orci. In id lacinia ligula.</p>
-                          <hr>
-                          <p>Phasellus at commodo ligula. Nullam molestie volutpat sapien, a dignissim tortor laoreet quis.</p>
+                        <?php foreach($result as $row){ ?>
+                          <h3>About Us</h3>
+                          <p><?php echo substr($row['description'],0,120)."..."; ?></p>
                           <div class="button">
-                              <a class="thm-btn" href="#">View Rooms</a>
+                              <a class="thm-btn" href="about-us.php">See More</a>
                           </div>
-
+                        <?php } ?> 
                       </div>
                   </div>
                     <div class="col-md-7">
                         <div class="intro_images magic_up">
-                            <div class="intro_1 intro_img"><img src="frontend_assets/img/about/intro_1.jpg" alt=""></div>
-                            <div class="intro_2 intro_img"><img src="frontend_assets/img/about/intro_2.jpg" alt=""></div>
-                            <div class="intro_3 intro_img"><img src="frontend_assets/img/about/intro_3.jpg" alt=""></div>
+                            <div class="intro_1 intro_img"><img src="<?php echo $row['image2'] ?>" alt=""></div>
+                            <div class="intro_2 intro_img"><img src="<?php echo $row['image'] ?>" alt=""></div>
+                            <div class="intro_3 intro_img"><img src="<?php echo $row['image3'] ?>" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -204,245 +203,112 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div>
             <section class="offer-section">
+							<?php
+
+							$query = "select * from concern";
+							$result = mysqli_query($connection, $query);
+							// $row = mysqli_fetch_assoc($result);
+
+							 ?>
             <div class="container">
                 <div class="row">
+									 <?php foreach($result as $row){ ?>
                     <div class="col-md-4 col-sm-4">
                         <div class="tour">
                             <a href="tour-place.html" class="tour-img">
-                                <img src="frontend_assets/img/tours/tour-2.jpg" alt="tour-img">
+                                <img src="<?php echo $row['image'] ?>" alt="tour-img">
                             </a>
                             <div class="desc">
-                                <h4>Family Tour in Greece</h4>
-                                <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
+                                <h4><?php echo $row['name']; ?></h4>
+                                <p><?php echo $row['ShortDescription']; ?></p>
                             </div>
                         </div>
                     </div>
-                </div>                     
-            </div>                
-            </section>  
-
-
-
-
-            
+									<?php } ?>
+                </div>
+            </div>
+            </section>
             <!-- End main content -->
-        </section>        
+        </section>
         <!-- End welcome section -->
 
         <!-- Start welcome section -->
-        <section class="best-offer-3 sec-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="offer-title text-center">
-                            <h2>Book early & save 20% on your travel</h2>
-                            <p>Book by May 20. The offer is related to all summer reservations. <br>To get the discount mention promo code REST during the checkout.</p>
-                            <a href="#" class="thm-btn">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+				<section class="numbers-section-3 sec-padding parallax-bg fix">
+				            <div class="container">
+				                <div class="row">
+				                    <div class="col-md-4 col-sm-4 col-xs-12">
+				                        <div class="section-titleBar text-left">
+				                            <h3>We are proud<br>with our achivness</h3>
+				                        </div>
+				                    </div>
+				                    <div class="col-md-8 col-sm-8 col-xs-12">
+				                        <div class="single-count-box">
+				                            <div class="box">
+				                                <div class="number-box"><span class="counter">44</span></div>
+				                                <div class="text-box">
+				                                    <p>SERVED BREAKFAST</p>
+				                                </div>
+				                            </div>
+				                        </div>
+				                        <div class="single-count-box">
+				                            <div class="box">
+				                                <div class="number-box"><span class="counter">66</span></div>
+				                                <div class="text-box">
+				                                    <p>INTERNATIONAL GUESTS</p>
+				                                </div>
+				                            </div>
+				                        </div>
+				                        <div class="single-count-box">
+				                            <div class="box">
+				                                <div class="number-box"><span class="counter">98</span></div>
+				                                <div class="text-box">
+				                                    <p>FIVE STARTRATINGS</p>
+				                                </div>
+				                            </div>
+				                        </div>
+				                    </div>
+				                </div>
+				            </div>
+				        </section>
         <!-- End welcome section -->
         <!-- Start project section -->
-        <section class="project-section sec-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="section-titleBar text-center">
-                            <h3>Our Rooms & Suits</h3>
-                            <p>Hotel analytics (BA) is the practice of iterative, methodical exploration of an
-                                organization's data with emphasis on statistical analysis.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="project-carousel">
-                        <!-- single-awesome-project start -->
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/1.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
+				<section class="our-overview sec-padding">
+				                <div class="container">
+				                  <div class="row">
+				                    <div class="col-md-6 col-sm-6">
+				                        <div class="about-wd">
+				                                <div class="section-titleBar text-left">
+				                                        <h3>Core Value of Resort</h3>
+				                                    <p>Integer placerat arcu quis sem aliquet tempor. Maecenas in dictum arcu. Curabitur cursus est libero, id accumsan sapien ullamcorper quis. Pellentesque imperdiet mi quis volutpat facilisis. In facilisis sit amet lacus ut convallis. Aenean congue porta dolor, in rutrum orci. In id lacinia ligula.</p>
 
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/2.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single-awesome-project end -->
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/3.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single-awesome-project end -->
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/4.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single-awesome-project end -->
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/5.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single-awesome-project end -->
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-awesome-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="img/project/6.jpg" alt="" />
-                                    </a>
-                                    <div class="price">$54</div>
-                                </div>
-                                <div class="project-dec">
-                                    <h4>Factory managment</h4>
-                                    <p>Our development opt in to the projects they genuinely want to work on, committing wholeheartedly to delivering.</p>
-                                    <div class="rating">
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star voted"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <small>(145)</small>
-                                    </div>
-                                    <ul>
-                                        <li><i class="icon_clock_alt"></i> 1h 30min</li>
-                                        <li><i class="icon_like"></i> 890</li>
-                                        <li><a href="course-detail.html">Book now</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- single-awesome-project end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End main content -->
-        </section>
+				                                </div>
+				                              <div class="lists">
+				                                <ul>
+				                                        <li><i class="fa fa-check-circle-o"></i>Hotel Growth</li>
+				                                        <li><i class="fa fa-check-circle-o"></i>Sustainability</li>
+				                                        <li><i class="fa fa-check-circle-o"></i>Performance</li>
+				                                </ul>
+				                                <ul>
+				                                        <li><i class="fa fa-check-circle-o"></i>Advanced Analytics</li>
+				                                        <li><i class="fa fa-check-circle-o"></i>Customer Insights</li>
+				                                        <li><i class="fa fa-check-circle-o"></i>Organization</li>
+				                                </ul>
+				                              </div>
+				                        </div>
+
+				                    </div>
+				                    <div class="col-md-6 col-sm-6">
+				                            <img src="frontend_assets/img/service/map.png" class="mb-15-xs" alt="map">
+				                    </div>
+				                  </div>
+				                </div>
+				              </section>
         <!-- End project section -->
 
         <!--Galery section Start-->
-        <section class="gallery-3 sec-padding">
+        <!-- <section class="gallery-3 sec-padding">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -512,164 +378,16 @@
                         <img src="img/galery/gal-14.jpg" alt="Gallery image 14" class="gallery__img">
                         <span class="tt-gallery-1-caption"><span class="tt-gallery-1-caption-table"><span class="tt-gallery-1-caption-inner"><span class="tt-gallery-1-search"><i class="fa fa-search"></i></span></span></span></span></a></figure>
 
-
-
             </div>
-        </section>
+        </section> -->
         <!--End of Galery section-->
 
         <!-- Start testimonials section -->
-        <section class="testimonial-section-2 sec-padding">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="section-titleBar text-center">
-                            <h3>Clients Testimonials</h3>
-                            <p>Hotel analytics (BA) is the practice of iterative.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
 
-                    <div class="testimonial-carousel">
-                        <div class="item">
-                            <blockquote>
-                                <div class="icon-holder">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-
-                                </div>
-                                Fusce non faucibus lorem. Cras eu velit id diam cursus tincidunt in ut dui. Quisque quis augue placerat, pulvinar dui aliquam, convallis sapien. Orci varius natoque penatibus et magnis dis parturient montes.
-                            </blockquote>
-                            <div class="testimonials-author">
-                                <div class="author-img">
-                                    <img class="img-responsive" src="img/review/1.jpg" alt="author">
-                                </div>
-                                <h5>George Simons<span> - Lawyer</span></h5>
-                                <ul>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- End single item -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="icon-holder">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-
-                                </div>
-                                Fusce non faucibus lorem. Cras eu velit id diam cursus tincidunt in ut dui. Quisque quis augue placerat, pulvinar dui aliquam, convallis sapien. Orci varius natoque penatibus et magnis dis parturient montes.
-                            </blockquote>
-                            <div class="testimonials-author">
-                                <div class="author-img">
-                                    <img class="img-responsive" src="img/review/1.jpg" alt="author">
-                                </div>
-                                <h5>George Simons<span> - Lawyer</span></h5>
-                                <ul>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- End single item -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="icon-holder">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-
-                                </div>
-                                Fusce non faucibus lorem. Cras eu velit id diam cursus tincidunt in ut dui. Quisque quis augue placerat, pulvinar dui aliquam, convallis sapien. Orci varius natoque penatibus et magnis dis parturient montes.
-                            </blockquote>
-                            <div class="testimonials-author">
-                                <div class="author-img">
-                                    <img class="img-responsive" src="frontend_assets/img/review/1.jpg" alt="author">
-                                </div>
-                                <h5>George Simons<span> - Lawyer</span></h5>
-                                <ul>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- End single item -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="icon-holder">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-
-                                </div>
-                                Fusce non faucibus lorem. Cras eu velit id diam cursus tincidunt in ut dui. Quisque quis augue placerat, pulvinar dui aliquam, convallis sapien. Orci varius natoque penatibus et magnis dis parturient montes.
-                            </blockquote>
-                            <div class="testimonials-author">
-                                <div class="author-img">
-                                    <img class="img-responsive" src="img/review/1.jpg" alt="author">
-                                </div>
-                                <h5>George Simons<span> - Lawyer</span></h5>
-                                <ul>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- End single item -->
-                        <div class="item">
-                            <blockquote>
-                                <div class="icon-holder">
-                                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-
-                                </div>
-                                Fusce non faucibus lorem. Cras eu velit id diam cursus tincidunt in ut dui. Quisque quis augue placerat, pulvinar dui aliquam, convallis sapien. Orci varius natoque penatibus et magnis dis parturient montes.
-                            </blockquote>
-                            <div class="testimonials-author">
-                                <div class="author-img">
-                                    <img class="img-responsive" src="img/review/1.jpg" alt="author">
-                                </div>
-                                <h5>George Simons<span> - Lawyer</span></h5>
-                                <ul>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                    <li><i class="fa fa-star" aria-hidden="true"></i></li>
-                                </ul>
-                            </div>
-
-                        </div>
-                        <!-- End single item -->
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-        </section>
         <!-- End testimonials end -->
 
         <!-- Start map section -->
-        <section class="map-section">
-                        <div class="our-location">
-                            <div class="map"><iframe src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Envato+Pty+Ltd,+Elizabeth+Street,+Melbourne,+Victoria,+Australia&amp;aq=0&amp;oq=envato+&amp;sll=37.0625,-95.677068&amp;sspn=39.235538,86.572266&amp;ie=UTF8&amp;hq=Envato+Pty+Ltd,&amp;hnear=Elizabeth+St,+Melbourne+Victoria+3000,+Australia&amp;ll=-37.817942,144.964977&amp;spn=0.01918,0.008866&amp;t=m&amp;output=embed"></iframe></div>
-                        </div>
-            <!-- End main content -->
-        </section>
+
         <!-- End map section -->
 
         <!-- Start Footer bottom section -->
@@ -681,14 +399,14 @@
                       <div class="footer-widget about-widget"><a class="logo" href="index-2.html"><img src="img/logo/logo2.png" alt="Awesome Image"></a>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean malesuada fringilla sem, at dictum lectus ultricies quis. Etiam eu bibendum orci. Aliquam erat volutpat.</p>
                         <div class="link"><a href="#">MORE ABOUT US</a> </div>
-          
+
                       </div>
                     </div>
                       <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="footer-widget links-widget links-widget-pac">
                           <div class="title">
                             <h4>Services</h4>
-                    
+
                           </div>
                           <div class="row">
                             <div class="col-md-12 col-sm-12">
@@ -704,9 +422,9 @@
                           </div>
                         </div>
                       </div>
-          
+
                     </div>
-          
+
                     <div class="col-md-6 col-sm-12 col-xs-12">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <div class="footer-widget subscribe-widget">
@@ -720,7 +438,7 @@
                             <button type="submit" class="ped-btn-footer">SUBSCRIBE US</button>
                           </div>
                         </form>
-          
+
                       </div>
                     </div>
                       <div class="col-md-6 col-sm-6 col-xs-12">
@@ -746,7 +464,7 @@
                               <p><a href="#">contact@lamarena.com</a></p>
                             </div>
                           </div>
-          
+
                           <ul class="social list-inline">
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
                             <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
@@ -756,7 +474,7 @@
                         </div>
                       </div>
                     </div>
-          
+
                   </div>
                 </div>
               </footer>
@@ -771,7 +489,7 @@
                       </div>
                     </div>
                   </section>
-		
+
 		<!-- all js files -->
 
 		<!-- jquery latest version -->

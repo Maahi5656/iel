@@ -6,14 +6,10 @@
         <li class="menu-title" key="t-apps">Apps</li>
 
             <li>
-                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                <a href="about-page.php" class="waves-effect">
                     <i class="bx bx-task"></i>
-                    <span key="t-tasks">About</span>
+                    <span key="t-tasks">About Us</span>
                 </a>
-                <ul class="sub-menu" aria-expanded="false">
-                    <li><a href="about.php" key="t-task-list">About Us</a></li>
-                    <li><a href="#" key="t-kanban-board">Update Content</a></li>
-                </ul>
             </li> 
 
             <li>
@@ -27,12 +23,12 @@
                 </ul>
             </li>                   
 
-        <li>
-            <a href="chat.html" class="waves-effect">
-                <i class="bx bx-chat"></i>
-                <span key="t-chat">Chat</span>
-            </a>
-        </li>
+            <li>
+                <a href="missionvision-page.php" class="waves-effect">
+                    <i class="bx bx-task"></i>
+                    <span key="t-tasks">Mission and Vision</span>
+                </a>
+            </li> 
 
     </ul>
 </div>
