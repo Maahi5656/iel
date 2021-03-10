@@ -1430,7 +1430,7 @@ select.ht-field {
 .gallery-section {
     background-color: #f9f7f6;
     grid-column: full-start / full-end;
-    display: grid;
+    display: flex;
     /*grid-template-columns: repeat(8, 1fr);
       grid-template-rows: repeat(7, 5vw);*/
     grid-template: repeat(7, 5vw)/repeat(8, 1fr);
@@ -4287,20 +4287,21 @@ padding-bottom: 0;
 }
 
 .blog-page-section .single-blog-post .img-holder img, .img-holder-grid img {
-    -webkit-transform: scale(1);
+    /*-webkit-transform: scale(1);
     -ms-transform: scale(1);
     transform: scale(1);
     opacity: 1;
     -webkit-transition: -webkit-transform .4s ease, opacity .4s ease;
-    transition: transform .4s ease, opacity .4s ease;
+    transition: transform .4s ease, opacity .4s ease;*/
+    width: 100%;
 }
-.blog-page-section .single-blog-post .img-holder:hover img {
+/*.blog-page-section .single-blog-post .img-holder:hover img {
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
     transform: scale(1.05);
     opacity: .7;
     cursor: pointer;
-}
+}*/
 .blog-page-section .single-blog-post .img-holder-grid:hover img {
     -webkit-transform: scale(1.05);
     -ms-transform: scale(1.05);
@@ -4720,4 +4721,93 @@ padding-bottom: 0;
 /*--------------------------------*/
 .single-about-project .awesome-img img{
     width: 100%;
+}
+
+
+.gallery{
+    width: 100%;
+    /*float: left;*/
+    padding: 30px 15px;
+}
+
+.gallery .title h2{
+    font-size: 36px;
+    margin: 0 0 30px 0;
+    color: #000;
+    text-align: center;
+}
+
+.gallery .gallery-items .item{
+    float: left;
+    width: 25%;
+    position: relative;
+}
+
+.gallery .gallery-items .item.hide{
+    display: none;
+}
+
+.gallery .gallery-items .item.show{
+    display: block;
+    animation: show 0.5s ease;
+}
+
+@keyframes show{
+     0%{
+        opacity: 0;
+        transform: scale(0.9);
+     }
+
+     100%{
+        opacity: 1;
+        transform: scale(1);
+     }
+}
+
+
+.gallery .gallery-items .item img{
+    display: block;
+    width: 100%;
+}
+
+.gallery .gallery-items .item .caption{
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+
+.gallery .pagination{
+    width: 100%;
+    float: left;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.gallery .pagination div{
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.gallery .pagination .page{
+    color: grey;
+}
+
+.gallery .pagination .prev, .gallery .pagination .next{
+    color: #000;
+    border: 1px solid #000;
+    font-size: 15px;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+.gallery .pagination .prev.disabled,
+.gallery .pagination .next.disabled{
+    border-color: gray;
+    color: gray;
+    pointer-events: none;
 }

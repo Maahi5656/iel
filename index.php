@@ -75,7 +75,7 @@ include 'database.php';
                                 <li class="dropdown"><a href="#">Our Concern</a>
                                 <ul class="dropdown-submenu">
                                   <?php foreach($result as $row){ ?>
-                                    <li><a href=""><?php echo $row['name'] ?></a></li>
+                                    <li><a href="concern-details.php?id=<?php echo $row['ID'] ?>"><?php echo $row['name'] ?></a></li>
 
                                   <?php } ?>
                                 </ul>
@@ -214,10 +214,10 @@ include 'database.php';
 							 ?>
             <div class="container">
                 <div class="row">
-									 <?php foreach($result as $row){ ?>
+					<?php foreach($result as $row){ ?>
                     <div class="col-md-4 col-sm-4">
                         <div class="tour">
-                            <a href="tour-place.html" class="tour-img">
+                            <a href="concern-details.php?id=<?php echo $row['ID'] ?>" class="tour-img">
                                 <img src="<?php echo $row['image'] ?>" alt="tour-img">
                             </a>
                             <div class="desc">
@@ -226,7 +226,7 @@ include 'database.php';
                             </div>
                         </div>
                     </div>
-									<?php } ?>
+					<?php } ?>
                 </div>
             </div>
             </section>

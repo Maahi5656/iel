@@ -1,8 +1,7 @@
 <?php 
 session_start();
-include 'database.php'
+include 'database.php';
 ?>
-
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -137,7 +136,7 @@ include 'database.php'
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="breadcrumb text-center">
                                 <div class="section-titleBar white-headline text-center">
-                                    <h3>About us</h3>
+                                    <h3>Concern</h3>
                                 </div>
                             </div>
                         </div>
@@ -150,83 +149,42 @@ include 'database.php'
                     <div class="row">
                         <ul>
                             <li class="home-bread">Home</li>
-                            <li>About us</li>
+                            <li>Our Concern</li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End breadcumb section -->
-
-        <!-- Start welcome section -->
-        <section class="about-section sec-padding">
-            <?php 
-              $query = "SELECT * FROM missionvision";
-              $result = mysqli_query($connection, $query);
-            ?>
+<section class="blog-page-section sec-padding">
+            <?php
+              if(isset($_GET['id'])){
+              	$id = $_GET['id'];
+              	$query = "SELECT * FROM concern WHERE ID = $id";
+              	$result = mysqli_query($connection, $query);
+              } 
+            ?>	
             <div class="container">
-                <?php foreach($result as $row){ ?>
+                <?php foreach($result as $row){ ?>            	
                 <div class="row">
-
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                            <!-- single-awesome-project start -->
-                            <div class="single-about-project">
-                                <div class="awesome-img">
-                                    <a href="#">
-                                        <img src="<?php echo $row['image'] ?>" alt="" />
-                                    </a>
+                    <div class="col-md-10">
+                        <div class="left-box">
+                            <!--Blog Single-->
+                            <div class="single-blog-post">
+                                <div class="img-holder"><img src="<?php echo $row['image'] ?>" alt="Awesome Image">
                                 </div>
+                                <h4><?php echo $row['name'] ?></h4>
+
+                                <p><?php echo $row['LongDescription'] ?></p>
                             </div>
-                    </div>
-                    <div class="about-whoweare">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-6 col-sm-6 col-xs-12 p-5">
-                                    <div class="about-content mrb">
-                                      
-                                        <h4>Mission</h4>
 
-                                        <p><?php echo $row['mission'] ?></p>
-<!--                                         <div class="about-details text-center">
-                                            <div class="lists">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle-o"></i>Which toil and pain can procure great pleasure.</li>
-                                                    <li><i class="fa fa-check-circle-o"></i>Any right to find man who annoying.</li>
-                                                    <li><i class="fa fa-check-circle-o"></i>Consequences, avoids a pain that produces.</li>
-                                                </ul>
-
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-sm-6 col-xs-12 p-5">
-                                    <div class="about-content">
-
-                                        <h4>Vision</h4>
-
-                                        <p><?php echo $row['vision'] ?></p>
-<!--                                         <div class="about-details text-center">
-                                            <div class="lists">
-                                                <ul>
-                                                    <li><i class="fa fa-check-circle-o"></i>Which toil and pain can procure great pleasure.</li>
-                                                    <li><i class="fa fa-check-circle-o"></i>Any right to find man who annoying.</li>
-                                                    <li><i class="fa fa-check-circle-o"></i>Consequences, avoids a pain that produces.</li>
-                                                </ul>
-
-                                            </div>
-                                        </div> -->
-                                    </div>
-                                </div>
-                            </div>
+                            <!--Blog Single ends-->
                         </div>
-                        <!-- End main content -->
                     </div>
+                <?php } ?>
                 </div>
-            <?php } ?>
+                <!-- End row -->
             </div>
-            <!-- End main content -->
-        </section>
-        <!-- End welcome section -->
+        </section>        
 
         <!-- Start Footer bottom section -->
         <footer class="footer sec-padding">

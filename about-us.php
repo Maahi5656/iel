@@ -110,7 +110,7 @@ include 'database.php';
                                 <li class="dropdown"><a href="#">Our Concern</a>
                                 <ul class="dropdown-submenu">
                                   <?php foreach($result as $row){ ?>
-                                    <li><a href=""><?php echo $row['name'] ?></a></li>
+                                    <li><a href="concern-details.php?id=<?php echo $row['ID'] ?>"><?php echo $row['name'] ?></a></li>
 
                                   <?php } ?>
                                 </ul>
