@@ -6,6 +6,14 @@
         <li class="menu-title" key="t-apps">Apps</li>
 
             <li>
+                <a href="profile.php" class="waves-effect">
+                    <i class="bx bx-task"></i>
+                    <span key="t-tasks">Profile</span>
+                </a>
+            </li> 
+
+
+            <li>
                 <a href="about-page.php" class="waves-effect">
                     <i class="bx bx-task"></i>
                     <span key="t-tasks">About Us</span>

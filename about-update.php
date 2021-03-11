@@ -16,7 +16,7 @@ if(isset($_POST['about-update'])){
    	move_uploaded_file($_FILES['about_image1']['tmp_name'], $newImage1);
    }else{
    	$newImage1 = $oldImage1;
-   }
+   } 
 
    if(isset($_FILES['about_image2']['name']) && ($_FILES['about_image2']['name']!="")){
    	$newImage2 = "uploads/".$_FILES['about_image2']['name'];
