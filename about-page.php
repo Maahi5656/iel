@@ -4,6 +4,13 @@ include 'database.php';
 
 ?>
 
+<?php
+if(!$_SESSION['admin']){
+    header('location: login.php');
+}
+?> 
+
+
 <?php include 'inc/header.php' ?>
 
 <div class="main-content">

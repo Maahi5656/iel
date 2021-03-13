@@ -1,4 +1,67 @@
+<?php 
+session_start();
+include 'database.php';
+
+if(isset($_SESSION['admin'])){
+    header('location: dashboard.php');
+}
+
+?>
+
+<?php
+
+    $username = $password = "";
+    $errors = array();
+
+    function test_input($value){
+        $value = trim($value);
+        $value = stripslashes($value);
+        $value = htmlspecialchars($value);
+        return $value;    
+    }
+
+    if(isset($_POST['loginBtn'])){
+
+        if(empty($_POST['username'])){
+            $errors['username'] = "Please Enter Your Username";
+            $_SESSION['username'] =  $errors['username']; 
+        }else{
+            $username = test_input($_POST['username']);
+        }
+
+        if(empty($_POST['password'])){
+             $errors['password'] = "Please Enter Your Passwords";
+             $_SESSION['password'] =  $errors['password']; 
+        }else{
+            $password = test_input($_POST['password']);
+        }
+
+        if(!$errors){
+            $sql = "SELECT * FROM profile WHERE username='$username' AND password='$password' ";
+            $result = mysqli_query($connection, $sql);
+
+            $row = mysqli_num_rows($result);
+            
+            if($result){
+                if($row>0){
+                    $_SESSION['admin'] = 'true';
+                    $_SESSION['username'] = $username;
+                    header("location: dashboard.php");
+                }else{
+                    $_SESSION['loginErrors'] = "Wrong Username Or Password";
+                    header("location: login.php");
+                    exit();
+                }                
+            }
+
+        }
+    }
+
+?>
+
+
 <!doctype html>
+
 <html lang="en">
 
     
@@ -31,9 +94,9 @@
                             <div class="bg-soft-primary">
                                 <div class="row">
                                     <div class="col-7">
-                                        <div class="text-primary p-4">
+                                        <div class="text-primary pt-4 pl-4 pr-0">
                                             <h5 class="text-primary">Welcome Back !</h5>
-                                            <p>Sign in to continue to Skote.</p>
+                                            <p>Sign in to continue to Admin Panel.</p>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -41,77 +104,62 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-body pt-0"> 
-                                <div>
-                                    <a href="index.html">
-                                        <div class="avatar-md profile-user-wid mb-4">
-                                            <span class="avatar-title rounded-circle bg-light">
-                                                <img src="assets/images/logo.svg" alt="" class="rounded-circle" height="34">
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
+                            <div class="card-body pt-5"> 
+
+                                 <?php if(isset($_SESSION['loginErrors'])): ?>
+                                        <span class="text-danger">
+                                            <?= $_SESSION['loginErrors']  ?>
+                                        </span>
+                                    <?php endif;?>
+
+                                        <?php 
+                                            unset($_SESSION['loginErrors']);
+                                        ?>
                                 <div class="p-2">
-                                    <form class="form-horizontal" action="https://themesbrand.com/skote/layouts/index.html">
+                                    <form class="form-horizontal" action="" method="post">
         
                                         <div class="form-group">
                                             <label for="username">Username</label>
-                                            <input type="text" class="form-control" id="username" placeholder="Enter username">
+                                            <input type="text" class="form-control" name="username" id="username" placeholder="Enter username">
+
+                                            <?php if(isset($_SESSION['username'])){ ?>
+                                            <span class="text-danger">
+                                                <?php echo $_SESSION['username']; ?>
+                                            </span>
+                                            <?php }unset($_SESSION['username']) ?>                                            
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="userpassword">Password</label>
-                                            <input type="password" class="form-control" id="userpassword" placeholder="Enter password">
-                                        </div>
-                
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="customControlInline">
-                                            <label class="custom-control-label" for="customControlInline">Remember me</label>
-                                        </div>
-                                        
-                                        <div class="mt-3">
-                                            <button class="btn btn-primary btn-block waves-effect waves-light" type="submit">Log In</button>
-                                        </div>
-            
-                                       
+                                            <input type="password" class="form-control" name="password" id="userpassword" placeholder="Enter password">
 
-                                        <div class="mt-4 text-center">
-                                            <h5 class="font-size-14 mb-3">Sign in with</h5>
-            
-                                            <ul class="list-inline">
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-primary text-white border-primary">
-                                                        <i class="mdi mdi-facebook"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-info text-white border-info">
-                                                        <i class="mdi mdi-twitter"></i>
-                                                    </a>
-                                                </li>
-                                                <li class="list-inline-item">
-                                                    <a href="javascript::void()" class="social-list-item bg-danger text-white border-danger">
-                                                        <i class="mdi mdi-google"></i>
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            <?php if(isset($_SESSION['password'])){ ?>
+                                            <span class="text-danger">
+                                                <?php echo $_SESSION['password']; ?>
+                                            </span>
+                                            <?php }unset($_SESSION['password']) ?>                                            
                                         </div>
 
-                                        <div class="mt-4 text-center">
+                                        <div class="mt-1 text-left">
                                             <a href="auth-recoverpw.html" class="text-muted"><i class="mdi mdi-lock mr-1"></i> Forgot your password?</a>
                                         </div>
+
+                                <div class="form-group row justify-content-end">
+                                    <div class="col-sm-12 py-3">
+                                        <input type="submit" name="loginBtn" class="btn btn-primary w-md" value="Login">
+                                    </div>                                        
                                     </form>
                                 </div>
             
                             </div>
                         </div>
-                        <div class="mt-5 text-center">
+                        <!-- <div class="mt-5 text-center">
                             
                             <div>
                                 <p>Don't have an account ? <a href="auth-register.html" class="font-weight-medium text-primary"> Signup now </a> </p>
                                 <p>© <script>document.write(new Date().getFullYear())</script> Skote. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -119,7 +167,7 @@
         </div>
 
         <!-- JAVASCRIPT -->
-        <?php include 'inc/script.php'   ?> 
+        <?php include 'inc/footer.php'   ?> 
     </body>
 
 <!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 15 Jan 2021 15:40:39 GMT -->

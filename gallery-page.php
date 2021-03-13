@@ -1,6 +1,6 @@
-<?php
+<?php 
 session_start();
-include 'database.php';
+include 'database.php'
 
 ?>
 
@@ -8,48 +8,34 @@ include 'database.php';
 if(!$_SESSION['admin']){
     header('location: login.php');
 }
-?>
+?> 
 
-<?php
-  $image = $concernName = $ShortDescription = $LongDescription = "";
-  $file = $filename = $tmp_name = $file_error = $temporaryExtension = $fileExtension = $isAllowed = $newFileName = $fileDestination = "";
-  $errors = array();
+<?php 
 
-  function test_input($value){
+$imageTitle = "";
+$errors = array();
+
+function test_input($value){
     $value = trim($value);
     $value = stripslashes($value);
     $value = htmlspecialchars($value);
     return $value;
-  }
+}
 
-  if(isset($_POST['concern']) ){
+if(isset($_POST['gallery'])){
 
-     if(empty($_POST['description'])){
-        $errors['description'] = "Please Enter Your Description";
-        $_SESSION['description'] = $errors['description'];
-     }else{
-        $ShortDescription = test_input($_POST['description']);
-     }
-
-     if(empty($_POST['details'])){
-        $errors['details'] = "Please Enter Your Description";
-        $_SESSION['details'] = $errors['details'];
-     }else{
-        $LongDescription = test_input($_POST['details']);
-     }
-
-     if(empty($_POST['concern_name'])){
-        $errors['concern_name'] = "Please Enter Name Of Your Service";
-        $_SESSION['concern_name'] = $errors['concern_name'];
-     }else{
-        $concernName = test_input($_POST['concern_name']);
-     }
-
-
-     if(empty($_FILES['image']['name'])){
+    if(empty($_POST['image_title'])){
+        $errors['title'] = "Please Give Title Of The Image";
+        $_SESSION['title'] = $errors['title'];        
+    }else{
+        $imageTitle = test_input($_POST['image_title']);
+    }
+   
+    
+    if(empty($_FILES['image']['name'])){
         $errors['image'] = "Please Insert An Image";
         $_SESSION['image'] = $errors['image'];
-     }else{
+    }else{
 
         //Uploading File In The Server
         $file = $_FILES['image'];
@@ -87,25 +73,28 @@ if(!$_SESSION['admin']){
     }
 
     if(!$errors){
-
     //sql query
-        $query = "INSERT INTO concern(name,ShortDescription,LongDescription,image) VALUES('$concernName','$ShortDescription','$LongDescription','$fileDestination')";
+        $query = "INSERT INTO gallery(name,title) VALUES('$fileDestination','$imageTitle')";
 
         $result = mysqli_query($connection, $query);
 
         if($result){
             $_SESSION['outcome'] = "Successfully Inserted New Service";
             $_SESSION['type'] = "success";
-            header("location: concern.php");
-            exit();            
+            header("location: gallery-page.php");
+            exit();
         }else{
             $_SESSION['outcome'] = "Error: ".mysqli_error($connection);
             $_SESSION['type'] = "danger";
         }
+
     }
+
 }
 
+
 ?>
+
 
 
 <?php include 'inc/header.php' ?>
@@ -117,12 +106,11 @@ if(!$_SESSION['admin']){
 
     <div class="page-content">
         <div class="container">
-
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">New Concern</h4>
+                            <h4 class="card-title mb-4">New Image</h4>
 
                                         <?php if(isset($_SESSION['outcome'])){ ?>
                                             <span class="text-<?php echo $_SESSION['type'] ?>">
@@ -135,8 +123,8 @@ if(!$_SESSION['admin']){
                                 <div class="form-group row mb-4">
                                     <label for="horizontal-password-input" class="col-sm-3 col-form-label">Image</label>
                                     <div class="col-sm-9">
-                                      <input type="file" name="image">
-                                        <?php if(isset($_SESSION['image'])){ ?>
+                                      <input type="file" name="image" class="d-block">
+                                         <?php if(isset($_SESSION['image'])){ ?>
                                         <span class="text-danger">
                                             <?php echo $_SESSION['image']; ?>
                                         </span>
@@ -145,46 +133,20 @@ if(!$_SESSION['admin']){
                                 </div>    
 
                                 <div class="form-group row mb-4">
-                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Name</label>
+                                    <label for="horizontal-firstname-input" class="col-sm-3 col-form-label">Title</label>
                                     <div class="col-sm-9">
-                                      <input type="text" name="concern_name" class="form-control" id="horizontal-firstname-input">
-
-                                            <?php if(isset($_SESSION['concern_name'])){ ?>
+                                      <input type="text" name="image_title" class="form-control w-50" id="horizontal-firstname-input">
+                                            <?php if(isset($_SESSION['title'])){ ?>
                                             <span class="text-danger">
-                                                <?php echo $_SESSION['concern_name']; ?>
+                                                <?php echo $_SESSION['title']; ?>
                                             </span>
-                                            <?php }unset($_SESSION['concern_name']) ?>
-
-                                    </div>
-                                </div>
-
-                               <div class="form-group row mb-4">
-                                    <label for="horizontal-password-input" class="col-sm-3 col-form-label">Brief Description</label>
-                                    <div class="col-sm-9">
-                                      <textarea name="description" id="service_details" cols="30" rows="5" style="width:100%;"></textarea>
-                                        <?php if(isset($_SESSION['description'])){ ?>
-                                        <span class="text-danger">
-                                            <?php echo $_SESSION['description']; ?>
-                                        </span>
-                                        <?php }unset($_SESSION['description']) ?>
-                                    </div>
-                                </div>
-
-                               <div class="form-group row mb-4">
-                                    <label for="horizontal-password-input" class="col-sm-3 col-form-label">Details</label>
-                                    <div class="col-sm-9">
-                                      <textarea name="details" id="service_details" cols="30" rows="10" style="width:100%;"></textarea>
-                                        <?php if(isset($_SESSION['details'])){ ?>
-                                        <span class="text-danger">
-                                            <?php echo $_SESSION['details']; ?>
-                                        </span>
-                                        <?php }unset($_SESSION['details']) ?>
+                                            <?php }unset($_SESSION['title']) ?> 
                                     </div>
                                 </div>
 
                                 <div class="form-group row justify-content-end">
                                     <div class="col-sm-9">
-                                        <button type="submit" name="concern" class="btn btn-primary w-md">Submit</button>
+                                        <button type="submit" name="gallery" class="btn btn-primary w-md">Submit</button>
                                     </div>
                                 </div>
                             </form>

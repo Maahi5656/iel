@@ -1,6 +1,12 @@
 <?php 
 session_start();
+include 'database.php';
+?>
 
+<?php
+if(!$_SESSION['admin']){
+	header('location: login.php');
+}
 ?> 
 <?php include 'inc/header.php' ?>
 

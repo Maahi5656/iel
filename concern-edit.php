@@ -4,6 +4,18 @@ include 'database.php';
 
 ?>
 
+<?php
+if(!$_SESSION['admin']){
+    header('location: login.php');
+}
+?> 
+
+<?php
+if(!$_SESSION['admin']){
+    header('location: login.php');
+}
+?> 
+
 <?php 
 if(isset($_GET['edit'])){
 	$id = $_GET['edit'];
@@ -97,11 +109,5 @@ if(isset($_GET['edit'])){
     <!-- End Page-content -->
 </div>
 <!-- end main content-->
-
-<?php include 'inc/footer.php' ?>
-
-
-
-
 
 <?php include 'inc/footer.php' ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 include 'database.php';
 
@@ -14,7 +14,7 @@ include 'database.php';
 
     <div class="page-content">
         <div class="container">
-             
+
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card">
@@ -24,29 +24,29 @@ include 'database.php';
                                 <span class="text-<?php echo $_SESSION['type'] ?>">
                                     <?php echo $_SESSION['outcome'] ?>
                                 </span>
-                            <?php }unset($_SESSION['outcome']) ?> 
+                            <?php }unset($_SESSION['outcome']) ?>
 
                             <form method="post" action="missionvision-update.php" enctype="multipart/form-data">
 
-                            <?php 
-                               
+                            <?php
+
                                $query = "SELECT * FROM missionvision WHERE ID = 1";
                                $result = mysqli_query($connection, $query);
                             ?>
 
                                 <?php foreach($result as $row){ ?>
 
-                                 <input type="hidden" name="id" value="<?php echo $row['ID'] ?>">   
+                                 <input type="hidden" name="id" value="<?php echo $row['ID'] ?>">
 
                                 <div class="form-group row mb-4">
                                     <label for="horizontal-password-input" class="col-sm-3 col-form-label">Image</label>
                                     <div class="col-sm-9">
                                         <input type="hidden" name="oldimage" value="<?php echo $row['image'] ?>">
                                         <input type="file" name="mvimage" value="<?php echo $row['image'] ?>">
-                                        <img src="<?php echo $row['image'] ?>" class="img-thumbnail w-25">                                      
+                                        <img src="<?php echo $row['image'] ?>" class="img-thumbnail w-25">
                                     </div>
-                            </div>                                                             
-                                
+                                </div>                                                             
+
                                <div class="form-group row mb-4">
                                     <label for="horizontal-password-input" class="col-sm-3 col-form-label">Mission</label>
                                     <div class="col-sm-9">
@@ -57,17 +57,17 @@ include 'database.php';
                                <div class="form-group row mb-4">
                                     <label for="horizontal-password-input" class="col-sm-3 col-form-label">Vision</label>
                                     <div class="col-sm-9">
-                                      <textarea name="vision" id="service_details" cols="30" rows="10" style="width:100%;"><?php echo $row['vision'] ?></textarea>                     
+                                      <textarea name="vision" id="service_details" cols="30" rows="10" style="width:100%;"><?php echo $row['vision'] ?></textarea>
                                     </div>
-                                </div>                                
+                                </div>
                             <?php } ?>
                                 <div class="form-group row justify-content-end">
                                     <div class="col-sm-9">
                                         <button type="submit" name="update_mv" class="btn btn-primary w-md">Update</button>
                                     </div>
                                 </div>
-                            </form>    
-                        </div>         
+                            </form>
+                        </div>
                     </div>
                  </div>
             </div>

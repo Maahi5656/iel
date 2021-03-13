@@ -2,7 +2,14 @@
 session_start();
 include 'database.php';
 
+?>
+
+<?php
+if(!$_SESSION['admin']){
+  header('location: login.php');
+}
 ?> 
+
 <?php
 
   $errors = array();

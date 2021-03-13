@@ -2,13 +2,14 @@
 session_start();
 include 'database.php';
 
-?> 
+?>
 
 <?php
 if(!$_SESSION['admin']){
 	header('location: login.php');
 }
-?> 
+?>  
+
 
 
 <?php include 'inc/header.php' ?>
@@ -25,15 +26,10 @@ if(!$_SESSION['admin']){
 			        <div class="card">
 			            <div class="card-body">
 			                        	<?php 
-                                           $query = "SELECT * FROM concern";
+                                           $query = "SELECT * FROM gallery";
                                            $result = mysqli_query($connection, $query);
 			                        	?>			            	
-			                <h4 class="card-title">Basic example</h4>
-			                <p class="card-title-desc">For basic styling—light padding and
-			                        only horizontal dividers—add the base class <code>.table</code> to any
-			                        <code>&lt;table&gt;</code>.
-			                </p>    
-
+			                <h4 class="card-title mb-5">List Of Items</h4>
 			                
                                         <?php if(isset($_SESSION['outcome'])){ ?>
                                             <span class="text-<?php echo $_SESSION['type'] ?>">
@@ -46,11 +42,9 @@ if(!$_SESSION['admin']){
 
 			                        <thead>
 			                            <tr>
-			                                <th>#</th>
+			                                <th class="w-25">#</th>
 			                                <th class="w-25">Image</th>
-			                                <th>Service</th>
-			                                <th class="w-25">Short Description</th>
-			                                <th class="w-25">Details</th>
+			                                <th class="w-25">Title</th>
 			                                <th class="w-25">Action</th>
 			                            </tr>
 			                        </thead>
@@ -61,14 +55,12 @@ if(!$_SESSION['admin']){
                                            foreach($result as $row):
 			                        	?>
 			                            <tr>
-			                                <th scope="row"><?= $i ?></th>
-			                                <td class="w-25"><img src="<?php echo $row['image'] ?>" alt="" style="width:200px; height: 200px;"></td>
-			                                <td><?php echo $row['name'] ?></td>
-			                                <td class="w-25"><?php echo $row['ShortDescription'] ?></td>
-			                                <td class="w-25"><?php echo $row['LongDescription'] ?></td>
+			                                <th class="w-25" scope="row"><?= $i ?></th>
+			                                <td class="w-25"><img class="img-thumbnail" src="<?php echo $row['name'] ?>" alt=""></td>
+			                                <td class="w-25"><?php echo $row['title'] ?></td>
 			                                <td class="w-25">
-                                                <a href="concern-edit.php?edit=<?php echo $row['ID']; ?>" class="btn btn-warning">Update</a>
-                                                <a href="concern-delete.php?delete=<?php echo $row['ID']; ?>" class="btn btn-danger">Delete</a>			                                	
+                                                <a href="gallery-edit.php?edit=<?php echo $row['ID']; ?>" class="btn btn-warning">Update</a>
+                                                <a href="gallery-delete.php?delete=<?php echo $row['ID']; ?>" class="btn btn-danger">Delete</a>			                                	
 			                                </td>
 			                            </tr>
 			                            <?php 

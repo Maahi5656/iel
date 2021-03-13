@@ -416,9 +416,10 @@ z-index: 0;
     color: #fff;
     transition: all .5s cubic-bezier(0.4, 0, 1, 1);
 }
+
 .header .header-right-info ul li .single-header-right-info .text-box,
 .header .header-right-info ul li .single-header-right-info .icon-box {
-    display: table-cell;
+    display: inline-block;
     vertical-align: middle;
 }
 .header .header-right-info ul li .single-header-right-info .icon-box {
@@ -1481,6 +1482,7 @@ select.ht-field {
 .gallery__img {
     width: 100%;
     height: 100%;
+		margin: 15px 0;
     object-fit: cover;
     display: block;
     border-radius: 5px;
@@ -1621,6 +1623,19 @@ select.ht-field {
     position: relative;
     color: #444;
     font-size: 16px;
+}
+
+#img-gallery{
+    position:relative;
+}
+
+#gallery-pagination{
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    right: 50%;
+    width: max-content;
+    transform: translate(-50%, 0);
 }
 
 /*---------------Contact form section-----------------*/
@@ -2635,7 +2650,7 @@ select.ht-field {
 .welcome-section-4 .intro_img img {
     max-width: 360px;
     height: 360px;
-    width: 100%;  
+    width: 100%;
 }
 
 .fluid-know-area {
@@ -3917,9 +3932,9 @@ padding-bottom: 0;
     display: block;
     line-height: 34px;
 }
-.contact-us .get-in-touch span a {
+/* .contact-us .get-in-touch span a {
     color: #222;
-}
+} */
 .contact-us .form input[type=submit] {
     border: 2px solid #4db7fe;
     color: #fff;
@@ -4724,6 +4739,8 @@ padding-bottom: 0;
 }
 
 
+
+
 .gallery{
     width: 100%;
     /*float: left;*/
@@ -4737,17 +4754,17 @@ padding-bottom: 0;
     text-align: center;
 }
 
-.gallery .gallery-items .item{
+.gallery .image-gallery-items .item{
     float: left;
     width: 25%;
     position: relative;
 }
 
-.gallery .gallery-items .item.hide{
+.gallery .image-gallery-items .item.hide{
     display: none;
 }
 
-.gallery .gallery-items .item.show{
+.gallery .image-gallery-items .item.show{
     display: block;
     animation: show 0.5s ease;
 }
@@ -4765,12 +4782,12 @@ padding-bottom: 0;
 }
 
 
-.gallery .gallery-items .item img{
+.gallery .image-gallery-items .item img{
     display: block;
     width: 100%;
 }
 
-.gallery .gallery-items .item .caption{
+.gallery .image-gallery-items .item .caption{
     position: absolute;
     left: 0px;
     bottom: 0;

@@ -38,6 +38,17 @@
                 </a>
             </li> 
 
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-task"></i>
+                    <span key="t-tasks">Gallery</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="false">
+                    <li><a href="gallery-page.php" key="t-task-list">Add New Image</a></li>
+                    <li><a href="gallery-item.php" key="t-kanban-board">See All</a></li>
+                </ul>
+            </li>            
+
     </ul>
 </div>
 <!-- Sidebar -->

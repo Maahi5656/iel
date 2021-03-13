@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 11, 2021 at 01:29 PM
+-- Generation Time: Mar 13, 2021 at 12:54 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -68,6 +68,32 @@ INSERT INTO `concern` (`ID`, `name`, `image`, `ShortDescription`, `LongDescripti
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gallery`
+--
+
+CREATE TABLE `gallery` (
+  `ID` int(20) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gallery`
+--
+
+INSERT INTO `gallery` (`ID`, `name`, `title`) VALUES
+(1, 'uploads/120416_r22071_g2048.jpg', 'Mecca'),
+(2, 'uploads/604c4d009b3640.49069453.jpg', 'Food'),
+(3, 'uploads/604c4d20bcf988.95052909.jpeg', 'Food'),
+(4, 'uploads/604c4d30a0e8e5.20891761.jpeg', 'Food'),
+(5, 'uploads/604c4d4aead859.29503478.jpeg', 'Cooking'),
+(6, 'uploads/604c5eee46be58.91361623.jpeg', 'Buffet'),
+(11, 'uploads/604c90da39ca45.08743546.jpg', 'Food'),
+(15, 'uploads/604c92d5b12f49.26067765.jpg', 'Food');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `missionvision`
 --
 
@@ -101,15 +127,15 @@ CREATE TABLE `profile` (
   `address` text NOT NULL,
   `officeHours` varchar(255) NOT NULL,
   `officeClosed` varchar(255) NOT NULL,
-  `companyLogo` varchar(255) NOT NULL
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `profile`
 --
 
-INSERT INTO `profile` (`ID`, `username`, `password`, `email`, `contact`, `website`, `address`, `officeHours`, `officeClosed`, `companyLogo`) VALUES
-(1, 'maahi7821', '', 'ajwadmaahi56@gmail.com', '01981088606', 'http://iel.com.bd/', 'BNS Center, Uttara, Dhaka, Bangladesh', 'Sat - Thu 9.00 - 19.00 ', 'Friday Closed', '');
+INSERT INTO `profile` (`ID`, `username`, `password`, `email`, `contact`, `website`, `address`, `officeHours`, `officeClosed`, `image`) VALUES
+(1, 'maahi7821', '12345', 'ajwadmaahi56@gmail.com', '01981088606', 'http://iel.com.bd/', 'BNS Center, Uttara, Dhaka, Bangladesh', 'Sat - Thu 9.00 - 19.00 ', 'Friday Closed', 'uploads/logo.jpg');
 
 --
 -- Indexes for dumped tables
@@ -125,6 +151,12 @@ ALTER TABLE `about`
 -- Indexes for table `concern`
 --
 ALTER TABLE `concern`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Indexes for table `gallery`
+--
+ALTER TABLE `gallery`
   ADD PRIMARY KEY (`ID`);
 
 --
@@ -154,6 +186,12 @@ ALTER TABLE `about`
 --
 ALTER TABLE `concern`
   MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `gallery`
+--
+ALTER TABLE `gallery`
+  MODIFY `ID` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `missionvision`
